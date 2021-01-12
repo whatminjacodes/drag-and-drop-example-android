@@ -8,8 +8,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.StretchingApp">
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.BasicMVVMExample">
+        <activity android:name="com.minjee.stretchingapp.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
