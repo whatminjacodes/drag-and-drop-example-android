@@ -39,6 +39,7 @@ class MainFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupClickListeners()
+        viewModel.initializeListOfMoves()
         fragmentTextUpdateObserver()
     }
 
