@@ -14,12 +14,12 @@ import com.minjee.stretchingapp.model.StretchMove
 class MainViewModel: ViewModel() {
 
     private val listData = ListData(ArrayList<StretchMove>())
-    val uiTextLiveData = MutableLiveData<String>()
+    //val uiTextLiveData = MutableLiveData<String>()
 
-    fun getUpdatedText() {
-        val updatedText = "updated text"
-        uiTextLiveData.postValue(updatedText)
-    }
+    //fun getUpdatedText() {
+      //  val updatedText = "updated text"
+        //uiTextLiveData.postValue(updatedText)
+    //}
 
     fun initializeListOfMoves() {
         val move1 = StretchMove("Splits",
@@ -34,9 +34,13 @@ class MainViewModel: ViewModel() {
         listData.listOfMoves.add(move3)
 
         for(move in listData.listOfMoves) {
-            System.out.println("move: " + move.nameOfTheMove + ", decription: " + move.descriptionOfTheMove)
+            //System.out.println("move: " + move.nameOfTheMove + ", decription: " + move.descriptionOfTheMove)
         }
 
-        // TODO: next add recyclerview and populate it withlist items
+        // TODO: next add recyclerview and populate it with list items
+    }
+
+    fun getListOfMoves(): ListData {
+        return listData
     }
 }

@@ -1,12 +1,15 @@
 package com.minjee.stretchingapp.view
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.minjee.stretchingapp.databinding.FragmentMainBinding
 import com.minjee.stretchingapp.viewmodel.MainViewModel
 
@@ -24,6 +27,9 @@ class MainFragment: Fragment() {
     // Create a viewModel
     private val viewModel: MainViewModel by activityViewModels()
 
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var adapter: RecyclerViewAdapter
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -40,7 +46,12 @@ class MainFragment: Fragment() {
 
         setupClickListeners()
         viewModel.initializeListOfMoves()
-        fragmentTextUpdateObserver()
+
+        linearLayoutManager = LinearLayoutManager(context)
+        binding.recyclerView.layoutManager = linearLayoutManager
+        adapter = RecyclerViewAdapter(viewModel.getListOfMoves())
+
+        //fragmentTextUpdateObserver()
     }
 
     override fun onDestroyView() {
@@ -50,13 +61,13 @@ class MainFragment: Fragment() {
 
     // Setup the button in our fragment to call getUpdatedText method in viewModel
     private fun setupClickListeners() {
-        binding.fragmentButton.setOnClickListener { viewModel.getUpdatedText() }
+       //binding.fragmentButton.setOnClickListener { viewModel.getUpdatedText() }
     }
 
     // Observer is waiting for viewModel to update our UI
     private fun fragmentTextUpdateObserver() {
-        viewModel.uiTextLiveData.observe(viewLifecycleOwner, Observer { updatedText ->
-            binding.fragmentTextView.text = updatedText
-        })
+        //viewModel.uiTextLiveData.observe(viewLifecycleOwner, Observer { updatedText ->
+            //binding.fragmentTextView.text = updatedText
+        //})
     }
 }
