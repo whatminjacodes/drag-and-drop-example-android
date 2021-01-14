@@ -44,12 +44,19 @@ class MainFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Log.d("mainfragment", "fragment created")
+
         setupClickListeners()
         viewModel.initializeListOfMoves()
 
+        binding.textView.text = "updated text"
         linearLayoutManager = LinearLayoutManager(context)
+
         binding.recyclerView.layoutManager = linearLayoutManager
-        adapter = RecyclerViewAdapter(viewModel.getListOfMoves())
+        var listOfMoves = viewModel.getListOfMoves()
+
+        Log.d("mainfragment", "list of moves size: " + listOfMoves.listOfMoves.size)
+        binding.recyclerView.adapter = RecyclerViewAdapter(listOfMoves)
 
         //fragmentTextUpdateObserver()
     }

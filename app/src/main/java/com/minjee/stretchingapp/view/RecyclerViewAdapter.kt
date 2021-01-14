@@ -2,14 +2,10 @@ package com.minjee.stretchingapp.view
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
-import com.minjee.stretchingapp.R
 import com.minjee.stretchingapp.databinding.RecyclerviewItemRowBinding
 import com.minjee.stretchingapp.model.ListData
-import com.minjee.stretchingapp.model.StretchMove
 
 class RecyclerViewAdapter(private val items: ListData) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
