@@ -1,14 +1,11 @@
 package com.minjee.stretchingapp.view
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.minjee.stretchingapp.databinding.FragmentMainBinding
 import com.minjee.stretchingapp.viewmodel.MainViewModel
@@ -28,7 +25,6 @@ class MainFragment: Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
 
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var adapter: RecyclerViewAdapter
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -37,28 +33,20 @@ class MainFragment: Fragment() {
     ): View? {
         // This is needed for view binding
         _binding = FragmentMainBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("mainfragment", "fragment created")
-
+        // Start setups
         setupClickListeners()
         viewModel.initializeListOfMoves()
 
-        binding.textView.text = "updated text"
+        // Recyclerview setup
         linearLayoutManager = LinearLayoutManager(context)
-
         binding.recyclerView.layoutManager = linearLayoutManager
-        var listOfMoves = viewModel.getListOfMoves()
-
-        Log.d("mainfragment", "list of moves size: " + listOfMoves.listOfMoves.size)
-        binding.recyclerView.adapter = RecyclerViewAdapter(listOfMoves)
-
-        //fragmentTextUpdateObserver()
+        binding.recyclerView.adapter = RecyclerViewAdapter(viewModel.getListOfMoves())
     }
 
     override fun onDestroyView() {
@@ -68,13 +56,11 @@ class MainFragment: Fragment() {
 
     // Setup the button in our fragment to call getUpdatedText method in viewModel
     private fun setupClickListeners() {
-       //binding.fragmentButton.setOnClickListener { viewModel.getUpdatedText() }
+
     }
 
     // Observer is waiting for viewModel to update our UI
     private fun fragmentTextUpdateObserver() {
-        //viewModel.uiTextLiveData.observe(viewLifecycleOwner, Observer { updatedText ->
-            //binding.fragmentTextView.text = updatedText
-        //})
+
     }
 }

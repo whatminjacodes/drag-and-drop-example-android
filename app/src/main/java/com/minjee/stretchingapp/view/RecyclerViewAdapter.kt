@@ -18,9 +18,9 @@ class RecyclerViewAdapter(private val items: ListData) : RecyclerView.Adapter<Re
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        //holder.viewBinding.itemName.text = items.listOfMoves[position].nameOfTheMove
-        val itemViewHolder = holder as StretchMoveHolder
-        holder.viewBinding.itemName.text = "asdasdads"
+        // TODO examine warning "java.lang.IllegalStateException: Handler (rpc) {7d01ae6} sending message to a Handler on a dead thread"
+        holder as StretchMoveHolder
+        holder.viewBinding.itemName.text = items.listOfMoves[position].nameOfTheMove
         holder.itemView.setOnClickListener {
             Log.d("Recyclerview", "CLICK!")
         }
