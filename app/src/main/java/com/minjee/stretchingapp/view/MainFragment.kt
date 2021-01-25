@@ -17,9 +17,7 @@ import com.minjee.stretchingapp.viewmodel.MainViewModel
  */
 class MainFragment: Fragment() {
 
-    // View Binding
-    private var _binding: FragmentMainBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentMainBinding
 
     // Create a viewModel
     private val viewModel: MainViewModel by activityViewModels()
@@ -27,12 +25,14 @@ class MainFragment: Fragment() {
     private lateinit var linearLayoutManager: LinearLayoutManager
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        // This is needed for view binding
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding = FragmentMainBinding.inflate(layoutInflater, container, false)
+        //binding.imageAddFood.setOnClickListener {
+          //  println("The CLICK###")
+        //}
         return binding.root
     }
 
@@ -45,13 +45,15 @@ class MainFragment: Fragment() {
 
         // Recyclerview setup
         linearLayoutManager = LinearLayoutManager(context)
-        binding.recyclerView.layoutManager = linearLayoutManager
-        binding.recyclerView.adapter = RecyclerViewAdapter(viewModel.getListOfMoves())
+        binding.apply {
+            recyclerView.layoutManager = linearLayoutManager
+            recyclerView.adapter = RecyclerViewAdapter(viewModel.getListOfMoves())
+            invalidateAll()
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
     }
 
     // Setup the button in our fragment to call getUpdatedText method in viewModel
