@@ -23,6 +23,7 @@ class RecyclerViewAdapter(private val items: ListData) : RecyclerView.Adapter<Re
         holder.viewBinding.itemName.text = items.listOfMoves[position].nameOfTheMove
         holder.itemView.setOnClickListener {
             Log.d("Recyclerview", "CLICK!")
+
         }
     }
 
