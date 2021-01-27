@@ -4,8 +4,12 @@
     
     <data>
         <variable
-            name="stretchMove"
-            type="com.minjee.stretchingapp.model.StretchMove" />
+            name="fragment"
+            type="com.minjee.stretchingapp.view.MainFragment" />
+
+        <variable
+            name="listener"
+            type="com.minjee.stretchingapp.view.MainFragment.ClickHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,6 +46,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="end"
+                    android:onClick="@{listener::onCardCloseButtonClicked}"
                     android:background="@drawable/rounded_close_button" />
 
                 <TextView
@@ -69,6 +74,15 @@
                     android:textSize="14sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/blockClicksView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:visibility="gone"
+            android:elevation="5dp"
+            android:clickable="true" />
 
         <TextView
             android:id="@+id/textView"
