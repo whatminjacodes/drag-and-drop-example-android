@@ -55,11 +55,30 @@ class MainViewModel : ViewModel() {
                     "4. Repeat on the other leg."
         )
 
+        val move6 = StretchMove(
+            "Figure Four Stretch",
+            "1. Lie on your back with your feet flat on the floor.\n" +
+                    "2. Cross your left foot over your right quad.\n" +
+                    "3. Lift your right leg off the floor. Grab onto the back of your right leg and gently pull it toward your chest.\n" +
+                    "4. When you feel a comfortable stretch, hold there.\n" +
+                    "5. Hold for 30 seconds to 2 minutes.\n" +
+                    "6. Switch sides and repeat."
+        )
+        val move7 = StretchMove(
+            "Knee to Chest Stretch",
+            "1. Lie on your back with both legs extended.\n" +
+                    "2. Pull your right knee into your chest, while keeping the left leg straight and your lower back pressed into the floor.\n" +
+                    "3. Hold for 30 seconds to 2 minutes.\n" +
+                    "4. Repeat on the other leg."
+        )
+
         listData.listOfMoves.add(move1)
         listData.listOfMoves.add(move2)
         listData.listOfMoves.add(move3)
         listData.listOfMoves.add(move4)
         listData.listOfMoves.add(move5)
+        listData.listOfMoves.add(move6)
+        listData.listOfMoves.add(move7)
     }
 
     fun getListOfMoves(): ListData {
