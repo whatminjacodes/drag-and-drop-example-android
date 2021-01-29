@@ -11,6 +11,7 @@ class RecyclerViewAdapter(private val items: ListData, private val clickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = RecyclerviewItemRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return StretchMoveHolder(binding)
     }
 
