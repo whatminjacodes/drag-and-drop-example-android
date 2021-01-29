@@ -42,19 +42,21 @@ class MainFragment : Fragment(), DragDropRecyclerViewAdapter.OnStartDragListener
         viewModel.initializeListOfMoves()
         binding.listener = ClickHandler()
 
-        adapter = DragDropRecyclerViewAdapter(this)
+       // adapter = DragDropRecyclerViewAdapter(this)
+
+        adapter =
+            DragDropRecyclerViewAdapter(this) { stretchMove: StretchMove ->
+                moveListItemClicked(
+                    stretchMove
+                )
+            }
+        adapter.setMoves(viewModel.getListOfMoves())
+
         linearLayoutManager = LinearLayoutManager(context)
         binding.apply {
             recyclerView.layoutManager = linearLayoutManager
-           /* recyclerView.adapter =
-                RecyclerViewAdapter(viewModel.getListOfMoves()) { stretchMove: StretchMove ->
-                    moveListItemClicked(
-                        stretchMove
-                    )
-                }*/
 
-
-            populateListItem()
+            adapter.setMoves(viewModel.getListOfMoves())
             val callback: ItemTouchHelper.Callback = ItemMoveCallbackListener(adapter)
             touchHelper = ItemTouchHelper(callback)
             touchHelper.attachToRecyclerView(recyclerView)
@@ -62,25 +64,6 @@ class MainFragment : Fragment(), DragDropRecyclerViewAdapter.OnStartDragListener
             recyclerView.adapter = adapter
             invalidateAll()
         }
-    }
-
-    private fun populateListItem() {
-        val users = listOf(
-            "Anuj",
-            "Bhanu",
-            "Chetan",
-            "Devendra",
-            "Esha",
-            "Farmod",
-            "Ganesh",
-            "Hemant",
-            "Ishaan",
-            "Jack",
-            "Kamal",
-            "Lalit",
-            "Mona"
-        )
-        adapter.setUsers(users)
     }
 
     private fun moveListItemClicked(stretchMove: StretchMove) {

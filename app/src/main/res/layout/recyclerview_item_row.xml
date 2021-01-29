@@ -10,16 +10,16 @@
     app:cardUseCompatPadding="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal" >
+        >
 
         <CheckBox
             android:id="@+id/itemCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="10dp"
             />
@@ -29,11 +29,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:text="TEMP"
             android:layout_marginStart="5dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:textSize="20sp"
+            android:layout_toEndOf="@id/itemCheckBox"
+            android:layout_centerVertical="true"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/dragIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@mipmap/drag_icon" />
+
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

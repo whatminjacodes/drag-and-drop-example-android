@@ -3,54 +3,53 @@ package com.minjee.stretchingapp.view
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.minjee.stretchingapp.R
-import com.minjee.stretchingapp.databinding.LayoutRecyclerviewItemBinding
 import com.minjee.stretchingapp.databinding.RecyclerviewItemRowBinding
 import com.minjee.stretchingapp.model.ListData
 import com.minjee.stretchingapp.model.StretchMove
 import com.minjee.stretchingapp.utils.ItemMoveCallbackListener
 import java.util.*
-import kotlin.math.log
 
-class DragDropRecyclerViewAdapter(private val startDragListener: OnStartDragListener) :
+class DragDropRecyclerViewAdapter(startDragListener: OnStartDragListener, private val clickListener: (StretchMove) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     ItemMoveCallbackListener.Listener
 {
 
     private val dragListener = startDragListener
-    private var users = emptyList<String>().toMutableList()
-    fun setUsers(newUsers: List<String>) {
-        users.addAll(newUsers)
+
+    private var moves = emptyList<StretchMove>().toMutableList()
+
+    fun setMoves(newMoves: ListData) {
+        moves.addAll(newMoves.listOfMoves)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-       // val binding = RecyclerviewItemRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        val binding = LayoutRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = RecyclerviewItemRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        //val binding = LayoutRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return StretchMoveHolder(binding)
     }
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
        // (holder as StretchMoveHolder).bind(items.listOfMoves[position], clickListener)
-        val user = users[position]
-        (holder as StretchMoveHolder).bind(user)
+       // val moveName = moves[position].nameOfTheMove
+        //(holder as StretchMoveHolder).bind(moveName)
+        (holder as StretchMoveHolder).bind(moves[position], clickListener)
 
     }
 
-    override fun getItemCount() = users.size
+    override fun getItemCount() = moves.size
 
-    inner class StretchMoveHolder(private val binding: LayoutRecyclerviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        //fun bind(move: StretchMove, clickListener: (StretchMove) -> Unit) {
-        fun bind(text: String) {
-            //binding.itemName.text = move.nameOfTheMove
-            //binding.root.setOnClickListener { clickListener(move) }
+    inner class StretchMoveHolder(private val binding: RecyclerviewItemRowBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(move: StretchMove, clickListener: (StretchMove) -> Unit) {
+       // fun bind(text: String) {
+            binding.itemName.text = move.nameOfTheMove
+            binding.root.setOnClickListener { clickListener(move) }
 
-            binding.textView.text = text
+           // binding.textView.text = text
 
-            binding.imageView.setOnTouchListener { _, event ->
+            binding.dragIcon.setOnTouchListener { _, event ->
                 if (event.action == MotionEvent.ACTION_DOWN) {
                     //this.startDragListener.onStartDrag(holder)
                     dragListener.onStartDrag(this)
@@ -92,11 +91,11 @@ class DragDropRecyclerViewAdapter(private val startDragListener: OnStartDragList
     override fun onRowMoved(fromPosition: Int, toPosition: Int) {
         if (fromPosition < toPosition) {
             for (i in fromPosition until toPosition) {
-                Collections.swap(users, i, i + 1)
+                Collections.swap(moves, i, i + 1)
             }
         } else {
             for (i in fromPosition downTo toPosition + 1) {
-                Collections.swap(users, i, i - 1)
+                Collections.swap(moves, i, i - 1)
             }
         }
         notifyItemMoved(fromPosition, toPosition)
